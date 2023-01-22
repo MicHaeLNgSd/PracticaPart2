@@ -6,6 +6,7 @@
             <h3>{{student.name}}</h3>
             <h4>{{student.group}}</h4>
             <h5>Завдання {{isDonePrOfStudent}}</h5>
+            <p>{{ studentsCount }}</p><br>
         
             <Modal :open="isOpen" @close="isOpen = !isOpen">
                 <img :src="student.photo" @click="isOpen= true"><br>
@@ -17,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Modal from "./Modal.vue";
 import { ref } from "vue";
 export default {
@@ -32,7 +32,7 @@ export default {
         };
     },
     mounted(){
-        axios.get("http://34.82.81.113:3000/students/"+this.id).then((res)=>{
+        this.axios.get("http://34.82.81.113:3000/students/"+this.id).then((res)=>{
             this.student = res.data;
         });
     },
@@ -41,6 +41,9 @@ export default {
         isDonePrOfStudent() {
             return this.student.isDonePr ? 'здана' : 'не здана'
         },
+        studentsCount () {
+            return this.$store.getters.getCount
+        }
     },
     setup() {
         const isOpen = ref(false);
@@ -54,6 +57,7 @@ export default {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        
     }
     .container{
         width: 100%;
@@ -76,5 +80,12 @@ export default {
         max-width: 100%;
         max-height: 100%;
     }
-
+    table.darkTheme{
+        background-color:blueviolet;
+        color:wheat
+    }
+    table.lightTheme{
+        background-color: burlywood;
+        color:rgb(163, 118, 208);
+    }
 </style>

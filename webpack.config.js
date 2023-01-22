@@ -1,8 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
+
     context: path.resolve(__dirname, 'src'),
     entry: './main.js',
     module: {
@@ -47,5 +49,6 @@ module.exports = {
             __VUE_PROD_DEVTOOLS__: false
         }),
         new VueLoaderPlugin(),
+        new Dotenv(),
     ],
 };
