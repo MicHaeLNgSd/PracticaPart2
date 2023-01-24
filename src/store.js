@@ -6,10 +6,12 @@ const store = createStore({
     state: {
         count: 0,
         isDark: false,
+        user: null,
     },
     mutations: {
         setCount: (state, count) => (state.count = count),
         setIsDark: (state) => (state.isDark = !state.isDark),
+        setUser: (state, user) => state.user = user,
     },
     getters: {
         getCount: (state) => {
@@ -17,7 +19,10 @@ const store = createStore({
         },
         getIsDark: (state) => {
             return state.isDark;
-        }
+        },
+        getUser: (state) => {
+            return state.user
+        },
     }
 })
 export default store;

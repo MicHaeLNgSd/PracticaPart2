@@ -23,9 +23,9 @@
                         <option value="RPZ 19 2/9">RPZ 19 2/9</option>
                     </select>
                 </td>
-                <td><a href = "#" @click="deleteStudent(item._id)">Видалити</a></td>
+                <td><a href = "#" @click="deleteStudent(item._id)" v-show="item.group === getCurrentUser.group">Видалити</a></td>
                 <td>
-                    <img v-if="this.editingId != item._id" @click="editStudentShow(item._id)" src="https://img.icons8.com/material-outlined/24/null/pencil-tip.png"/>
+                    <img v-show="item.group === getCurrentUser.group" v-if="this.editingId != item._id" @click="editStudentShow(item._id)" src="https://img.icons8.com/material-outlined/24/null/pencil-tip.png"/>
                     <button v-else @click="editStudent(item._id)">Edit</button>
                 </td>
 			</tr>
@@ -111,6 +111,9 @@
         studentsCount () {
             return this.$store.getters.getCount
         },
+        getCurrentUser() {
+           return this.$store.getters.getUser
+        }
     }
     }
 </script>
